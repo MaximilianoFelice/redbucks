@@ -8,4 +8,7 @@ package object coffeemixer {
     case _ => StrongCoffee(coffee)
   }
 
+  def mixCoffee(ingredients: Seq[Ingredient]): Coffee =
+    ingredients.foldLeft[tree.Tree[Ingredient]](tree.Empty())(_.add(_)).foldLeft(Coffee())(_.add(_))
+
 }

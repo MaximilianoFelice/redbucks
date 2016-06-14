@@ -1,6 +1,7 @@
 package coffeemixer
 
 import org.scalatest.{FlatSpec, Matchers}
+import tree._
 
 class MixerSpec extends FlatSpec with Matchers {
 
@@ -56,4 +57,19 @@ class MixerSpec extends FlatSpec with Matchers {
     mix.cream should be (true)
   }
 
+  "Ingredients" should "be correctly added to a tree" in {
+    val ingredients: Seq[Ingredient] = Seq(Chocolate())
+
+    Empty().add(Chocolate()).length should be (1)
+    Empty[Ingredient]().add(Chocolate()).add(Cream()).length should be (2)
+  }
+
+  "A list of ingredients" should "be combined by a tree" in {
+    val ingredients: Seq[Ingredient] = Seq(Chocolate(), Chocolate(), Cream(), ColombianBeans(), Cream(), ColombianBeans())
+    val coffee: Coffee = mixCoffee(ingredients)
+
+    coffee.texture should be (22)
+    coffee.cream should be (true)
+    coffee.flavor should be ("bitter")
+  }
 }
