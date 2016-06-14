@@ -1,14 +1,14 @@
-import org.scalatest.FlatSpec
+package coffeemixer
 
-class MixerSpec extends FlatSpec {
+import org.scalatest.{FlatSpec, Matchers}
 
-  "An empty Set" should "have size 0" in {
-    assert(Set.empty.size == 0)
+class MixerSpec extends FlatSpec with Matchers {
+
+  "A Base Coffee" should "have basic stats" in {
+    val coffee = Coffee()
+    coffee.texture should be (0)
+    coffee.flavor should be ("neutral")
+    coffee.cream should be (false)
   }
 
-  it should "produce NoSuchElementException when head is invoked" in {
-    intercept[NoSuchElementException] {
-      Set.empty.head
-    }
-  }
 }
